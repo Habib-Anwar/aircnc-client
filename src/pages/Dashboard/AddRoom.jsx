@@ -2,10 +2,16 @@ import { useContext, useState } from "react";
 import AddRoomForm from "../../components/Forms/AddRoomForm";
 import { imageUpload } from "../../api/utils";
 import { AuthContext } from "../../providers/AuthProvider";
+import { addRoom } from "../../api/rooms";
 
 
 const AddRoom = () => {
-    const { user } = useContext(AuthContext)
+    const { user } = useContext(AuthContext);
+    const [dates, setDates] = useState({
+        startDate: new Date(),
+        endDate: new Date(),
+        key: 'selection',
+    })
     const [loading, setLoading] = useState(false)
     const [uploadButtonText, setUploadButtonText] = useState('Upload Image')
     // handle form submit
@@ -33,15 +39,26 @@ const AddRoom = () => {
                 title,
                 from,
                 to,
-                price, 
+                price: parseFloat(price),
                 total_guest,
                 bedrooms,
                 bathrooms,
                 description,
+                host: {
+                    name: user?.displayName,
+                    image: user?.photoURL,
+                    email: user?.email,
+                },
                 category
 
             }
-            console.log(data.data.display_url)
+            // post room data to server
+              addRoom(roomData)
+              .then(data =>console.log(data))
+              .catch(err => console.log(err.message))
+
+            console.log(roomData)
+            // console.log(data.data.display_url)
         setLoading(false)})
         .catch(err =>{
             console.log(err.message)
@@ -51,13 +68,21 @@ const AddRoom = () => {
     const handleImageChange = image =>{
         setUploadButtonText(image.name)
     }
+
+    const handleDates = ranges =>{
+        // return console.log(ranges.selection),
+        setDates(ranges.selection)
+    }
+
     return (
         <div>
           <AddRoomForm
           handleSubmit={handleSubmit}
           loading={loading}
           handleImageChange={handleImageChange}
-          uploadButtonText={uploadButtonText}></AddRoomForm>
+          uploadButtonText={uploadButtonText}
+          dates={dates}
+          handleDates={handleDates}></AddRoomForm>
         </div>
     );
 };
