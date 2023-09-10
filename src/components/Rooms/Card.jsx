@@ -3,7 +3,7 @@ import HeartButton from '../Button/HeartButton'
 
 const Card = ({room}) => {
     const { _id, location, image, price, dateRange} = room;
-    // console.log(dateRange, location)
+    console.log(dateRange, location)
   return (
     <Link to={`/room/${_id}`} className='col-span-1 cursor-pointer group'>
       <div className='flex flex-col gap-2 w-full'>

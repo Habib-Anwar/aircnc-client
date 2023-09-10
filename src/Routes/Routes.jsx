@@ -49,6 +49,10 @@ import ManageBookings from "../pages/Dashboard/ManageBookings";
         </PrivateRoute>,
       children: [
                 {
+                  path: '/dashboard',
+                  element: <MyBookings></MyBookings>
+                 },
+                {
                   path: '/dashboard/add-room',
                   element: <AddRoom></AddRoom>
                 },

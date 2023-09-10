@@ -34,3 +34,16 @@ export const getRoom = async (id) =>{
     return data
 }
 
+// Delete a room
+export const deleteRoom = async id =>{
+    const response = await fetch(`${import.meta.env.VITE_API_URL}/rooms/${id}`, {
+        method: 'DELETE',
+        headers: {
+            'content-type': 'application/json',
+            // authorization: `Bearer ${localStorage.getItem('aircnc-token')}`,
+        },
+    })
+    const result = await response.json()
+    return result
+}
+
