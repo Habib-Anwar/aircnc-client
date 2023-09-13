@@ -31,8 +31,11 @@ const MenuDropdown = () => {
   return (
     <div className='relative'>
       <div className='flex flex-row items-center gap-3'>
-        <div className='hidden md:block text-sm font-semibold py-3 px-8 rounded-full transition cursor-pointer'>
-          {!role && (<button disabled={!user} onClick={()=>setModal(true)} className='cursor-pointer hover:bg-neutral-100'>AirCNC your home</button>)}
+        <div className='hidden md:block'>
+          {!role && (
+          <button
+          className= 'cursor-pointer hover:bg-neutral-100 text-sm font-semibold py-3 px-8 rounded-full transition cursor-pointer'
+           disabled={!user} onClick={()=>setModal(true)}>AirCNC your home</button>)}
         </div>
         <div
           onClick={toggleOpen}
@@ -45,7 +48,7 @@ const MenuDropdown = () => {
         </div>
       </div>
       {isOpen && (
-        <div className='absolute rounded-xl shadow-md w-[40vw] md:w-3/4 bg-white overflow-hidden right-0 top-12 text-sm'>
+        <div className='absolute rounded-xl shadow-md w-[40vw] md:w-[10vw] bg-white overflow-hidden right-0 top-12 text-sm'>
           <div className='flex flex-col cursor-pointer'>
             <Link
               to='/'

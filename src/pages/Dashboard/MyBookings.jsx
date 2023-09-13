@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react"
 import { AuthContext } from "../../providers/AuthProvider"
 import { getBookings } from "../../api/auth"
 import TableRow from "../../components/Dashboard/TableRow"
+import EmptyState from "../../components/Shared/EmptyState"
 
 const MyBookings = () => {
     const { user} = useContext(AuthContext)
@@ -13,6 +14,8 @@ const MyBookings = () => {
         fetchBookings();
       },[user])
     return (
+      <>
+      {bookings && Array.isArray(bookings) && bookings.length>0? (
       <div className='container mx-auto px-4 sm:px-8'>
         <div className='py-8'>
           <div className='-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto'>
@@ -65,7 +68,10 @@ const MyBookings = () => {
             </div>
           </div>
         </div>
-      </div>
+      </div>)
+        : (<EmptyState
+        message={'You did not book any room yet!'} address={'/'} label={'Browse Rooms'}></EmptyState>)  }
+      </>
     )
   }
   
