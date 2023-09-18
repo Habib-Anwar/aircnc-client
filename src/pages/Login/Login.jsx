@@ -3,7 +3,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { FcGoogle } from 'react-icons/fc'
 import { useContext, useRef } from 'react'
 import { AuthContext } from '../../providers/AuthProvider'
-import { toast } from 'react-hot-toast'
+import  toast  from 'react-hot-toast'
 import { TbFidgetSpinner } from 'react-icons/tb';
 import { saveUser } from '../../api/auth'
 
